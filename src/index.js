@@ -2,13 +2,13 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const makeid = require('./consts');
-
+const saveList = require('./consts').saveList;
 const path = require('path');
 const app = express();
 const jsonParser = bodyParser.json();
 
-const userState = [];
+const userState = require("./filename.json");
+console.log(userState);
 
 app.use(cookieParser());
 app.use(session({
@@ -25,24 +25,22 @@ require('./levels/level1.js')(app, jsonParser, userState);
 app.post('/genID', jsonParser, function (req, res) {
     if (!req.session.uid) {
         req.session.uid = req.body.uid;
-
+        let hasFound = false;
         for (let i = 0; i < userState.length; i++) {
-            if (!(userState[i].id === req.body.uid) && req.body.uid != '') {
-                userState.push({
-                    id: req.body.uid,
-                    levels: []
-                });
+
+            if ((userState[i].id === parseInt(req.body.uid))) {
+                hasFound = true;
             }
+
         }
 
-        if (userState.length === 0) {
+        if (userState.length === 0 || !hasFound) {
             userState.push({
                 id: req.body.uid,
                 levels: []
             });
+            saveList(userState);
         }
-
-
     }
     console.log(userState)
     res.send(`${req.session.uid}`);

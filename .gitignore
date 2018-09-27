@@ -71,3 +71,7 @@ typings/
 
 # Serverless directories
 .serverless
+
+# Persistent store
+
+src/filename.json
