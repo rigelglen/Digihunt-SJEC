@@ -1,32 +1,32 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const saveList = require('./consts').saveList;
 const path = require('path');
 const app = express();
 const jsonParser = bodyParser.json();
+var cookieSession = require('cookie-session')
 
 const userState = require("./filename.json");
 console.log(userState);
 
 let port = process.env.PORT || 8080;
 
-
-app.use(cookieParser());
-app.use(session({
-    secret: `&1ztmd5C<DN2M!C@$Kob?Nq'{9TYe7`,
-    saveUninitialized: true,
-    resave: true
-}));
+app.use(cookieSession({
+    name: 'session',
+    keys: [`&1ztmd5C<DN2M!C@$Kob?Nq'{9TYe7`]
+  }))  
 
 app.use(express.static(path.join(__dirname, '../public'),
     { index: false, extensions: ['html'] }));
 
 
 require('./levels/level1.js')(app, jsonParser, userState);
+require('./levels/level2.js')(app, jsonParser, userState);
 
 app.get('/start', (req, res) => {
+    if(req.session.uid){
+        res.sendFile(path.join(__dirname, '../levels/start-noinput.html'));
+    }
     res.sendFile(path.join(__dirname, '../levels/start.html'));
 })
 

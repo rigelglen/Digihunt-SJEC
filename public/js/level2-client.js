@@ -4,7 +4,7 @@ let inp = document.querySelector('#code');
 button.addEventListener('click', () => {
     if (inp.value.trim().length > 4 && !isNaN(inp.value.trim())) {
         document.querySelector(".overlay").style.display = 'flex';
-        axios.post('/level1/auth', {
+        axios.post('/level2/auth', {
             code: parseInt(inp.value.trim())
         }).then((response) => {
             console.log(`Status is ${response.data.message}`);
@@ -13,9 +13,6 @@ button.addEventListener('click', () => {
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("levels", response.data.userArray.levels);
-
-            window.location.href='./level2';
-
         }).catch((err) => {
             alert('Wrong code');
             document.querySelector(".overlay").style.display = 'none';

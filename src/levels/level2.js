@@ -1,21 +1,26 @@
+const level2Code = require('../consts').codes[1];
 const level1Code = require('../consts').codes[0];
 const saveList = require('../consts').saveList;
 const path = require('path');
 
-let code = 123456;
+let code = 12345677;
 
 module.exports = function (app, jsonParser, userState) {
 
-    app.get('/level1', (req, res) => {
-        if (!req.session.uid) {
+    app.get('/level2', (req, res) => {
+        if (!req.session.uid) {     
             res.redirect(403, '/start');
         } else {
-            res.sendFile(path.join(__dirname, '../../levels/lvl1.html'));
+            let user = userState.find(x=>x.id === req.session.uid);
+            if(user.levels[0] === level1Code)
+                res.sendFile(path.join(__dirname, '../../levels/lvl2.html'));
+            else
+                res.redirect(403, '/level1');
         }
     });
 
 
-    app.post('/level1/auth', jsonParser, (req, res) => {
+    app.post('/level2/auth', jsonParser, (req, res) => {
         console.log(req.body.code);
         console.log('session' + req.session.uid);
         let foundUser;
@@ -23,8 +28,8 @@ module.exports = function (app, jsonParser, userState) {
 
         for (let i = 0; i < userState.length; i++) {
             if (userState[i].id === req.session.uid) {
-                if (!userState[i].levels[0] && parseInt(req.body.code) === code)
-                    userState[i].levels.push(level1Code);
+                if (parseInt(req.body.code) === code)
+                    userState[i].levels.push(level2Code);
                 saveList(userState);
                 foundUser = userState[i];
                 sessionValid = true;
@@ -32,7 +37,7 @@ module.exports = function (app, jsonParser, userState) {
         }
 
         if (parseInt(req.body.code) === code && sessionValid) {
-            res.send({ 'message': 'Success!!', code: level1Code, userArray: foundUser })
+            res.send({ 'message': 'Success!!', code: level2Code, userArray: foundUser })
         } else {
             res.status(406);
             res.send({ 'message': 'Fail :(' });
