@@ -10,6 +10,9 @@ const jsonParser = bodyParser.json();
 const userState = require("./filename.json");
 console.log(userState);
 
+let port = process.env.PORT || 8080;
+
+
 app.use(cookieParser());
 app.use(session({
     secret: `&1ztmd5C<DN2M!C@$Kob?Nq'{9TYe7`,
@@ -46,4 +49,4 @@ app.post('/genID', jsonParser, function (req, res) {
     res.send(`${req.session.uid}`);
 })
 
-app.listen(3000);
+app.listen(port);
