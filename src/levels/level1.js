@@ -1,9 +1,20 @@
 const level1Code = require('../consts').codes[0];
 const saveList = require('../consts').saveList;
+const path = require('path');
 
 let code = 123456;
 
 module.exports = function (app, jsonParser, userState) {
+
+    app.get('/level1', (req, res) => {
+        if (!req.session.uid) {
+            res.redirect('/start', 403);
+        } else {
+            res.sendFile(path.join(__dirname, '../../levels/lvl1.html'));
+        }
+    });
+
+
     app.post('/level1/auth', jsonParser, (req, res) => {
         console.log(req.body.code);
         console.log('session' + req.session.uid);
@@ -22,7 +33,12 @@ module.exports = function (app, jsonParser, userState) {
         if (parseInt(req.body.code) === code && sessionValid) {
             res.send({ 'message': 'Success!!', code: level1Code, userArray: foundUser })
         } else {
-            res.send({ 'message': 'Fail :(' })
+            res.status(406);
+            res.send({ 'message': 'Fail :(' });
         }
     });
+
+
+
+
 }

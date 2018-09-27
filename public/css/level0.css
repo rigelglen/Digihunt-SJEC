@@ -1,0 +1,94 @@
+body {
+    background: #795548;
+    font-family: 'Papyrus';
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 0;
+}
+
+div#container {
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 0px;
+}
+
+div#page {
+    background-color: transparent;
+    background-image: url('/img/parch.png');
+    padding: 20px 50px;
+    box-sizing: border-box;
+    background-position: center;
+    position: relative;
+    background-size: 100%;
+}
+
+#page:before {
+    background-color: transparent;
+    background-image: url('/img/parch-top.png');
+    background-size: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    left: -2px;
+    width: 100%;
+    height: 34px;
+    content: "";
+    background-position: center center;
+    z-index: 10;
+    box-sizing: border-box;
+    top: -14px;
+}
+
+#page:after {
+    background-image: url('/img/parch-bottom.png');
+    bottom: -14px;
+    background-color: transparent;
+    background-size: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-width: 100%;
+    left: -2px;
+    width: 100%;
+    height: 34px;
+    content: "";
+    background-position: center center;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+#page p {
+    font-size: 1.4em;
+}
+
+input#code {
+    border: 1px solid #795548;
+    padding: 10px;
+    background: rgba(246, 234, 213, 0.8);
+    border-radius: 5px;
+    outline: none;
+    width: 50%;
+    min-width: 200px;
+    margin-right: 10px;
+}
+
+button#submitCode {
+    padding: 10px;
+    border: 1px solid saddlebrown;
+    background: rgba(246, 234, 213, 0.8);
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    outline: none;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+}
