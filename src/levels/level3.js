@@ -12,7 +12,7 @@ module.exports = function (app, jsonParser, userState) {
             res.redirect(403, '/start');
         } else {
             let user = userState.find(x=>x.id === req.session.uid);
-            if(user.levels[1] === level2Code)
+            if(user && user.levels[1] === level2Code)
                 res.sendFile(path.join(__dirname, '../../levels/lvl3.html'));
             else
                 res.redirect(403, '/level2');
