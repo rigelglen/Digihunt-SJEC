@@ -5,7 +5,6 @@ const path = require('path');
 let code = 123456;
 
 module.exports = function (app, jsonParser, userState) {
-
     app.get('/level1', (req, res) => {
         if (!req.session.uid) {
             res.redirect(403, '/start');
