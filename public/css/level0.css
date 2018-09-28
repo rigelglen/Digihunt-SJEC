@@ -2,7 +2,6 @@ body {
     background: #795548;
     font-family: 'Papyrus';
     height: 100%;
-    position: absolute;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -91,4 +90,8 @@ button#submitCode {
 #controls {
     display: flex;
     justify-content: center;
+}
+
+.completed{
+    display: none;
 }

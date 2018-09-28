@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Level 1</title>
+    <title>Level 3</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/level0.css">
-    <link rel="stylesheet" href="/css/puzzleimg.css">
+    <link rel="stylesheet" href="/css/snake.css">
     <style>
     div#container {
         margin-top: 500px;
@@ -20,16 +20,15 @@
         <div class="loader"></div>
     </div>
     <div id="container">
-        <h1>FIRST PUZZLE <span class="completed">(completed)</span></h1>
+        <h1>THIRD PUZZLE <span class="completed">(completed)</span></h1>
 
         <div id="page">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel mauris sit amet lorem fermentum
                 hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam congue, ligula at
                 mattis mollis, magna massa semper diam, et blandit lectus lacus et nulla. Vivamus feugiat hendrerit
                 erat, sit amet feugiat sapien posuere vel. </p>
-
-            <div id="puz1" class="puzelm">Here it is added the canvas with the puzzle.</div>
-            <h2 align=center>What is the name of this ferocious beast?</h2>
+            <div id="snakeGame" tabindex="0">
+            </div>
             <div id="controls">
                 <input id="code" type="text">
                 <button id="submitCode">GO</button>
@@ -38,13 +37,22 @@
     </div>
 
     <script src="/js/axios.min.js"></script>
-    <script src="/js/puzzleimg.js"></script>
-    <script src="/js/level1-client.js"></script>
+    <script src="/js/snake.js"></script>
+    <script src="/js/level3-client.js"></script>
 
     <script>
-        if (JSON.parse(localStorage.levels)[0]) {
+        if (JSON.parse(localStorage.levels)[2]) {
             document.querySelector('.completed').style.display = 'inline';
         }
+
+        var mySnakeBoard = new SNAKE.Board(  {
+                                            boardContainer: "snakeGame",
+                                            fullScreen: false,
+                                            width: 600
+                                            
+                                        });    // nov 2017 test
+
+
     </script>
 
 

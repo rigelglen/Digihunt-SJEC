@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, '../public'),
 
 require('./levels/level1.js')(app, jsonParser, userState);
 require('./levels/level2.js')(app, jsonParser, userState);
+require('./levels/level3.js')(app, jsonParser, userState);
 
 app.get('/start', (req, res) => {
     if(req.session.uid){
@@ -48,7 +49,6 @@ app.post('/genID', jsonParser, (req, res) => {
             saveList(userState);
         }
     }
-    console.log(userState)
     let response = { id: req.session.uid };
     res.send(response);
 })

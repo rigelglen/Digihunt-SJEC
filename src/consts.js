@@ -3,6 +3,7 @@ const codes = ["JT8DZdWCtfn0ZrI", "kd32fMHUGAYcLFe", "ovssUvoCP5RTAeY", "Jn2MNON
 var fs = require("fs");
 
 const saveList = (userState) => {
+  console.log('UserState to be saved is \n' + JSON.stringify(userState, null, 4));
   fs.writeFile("src/filename.json", JSON.stringify(userState), "utf8", () => {
     console.log("saved");
   });

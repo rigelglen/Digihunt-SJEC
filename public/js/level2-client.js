@@ -12,7 +12,8 @@ button.addEventListener('click', () => {
 
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
-            localStorage.setItem("levels", response.data.userArray.levels);
+            localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
+            window.location.href='./level3';
         }).catch((err) => {
             alert('Wrong code');
             document.querySelector(".overlay").style.display = 'none';

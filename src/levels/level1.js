@@ -2,7 +2,7 @@ const level1Code = require('../consts').codes[0];
 const saveList = require('../consts').saveList;
 const path = require('path');
 
-let code = 123456;
+let code = 'kilgarah';
 
 module.exports = function (app, jsonParser, userState) {
     app.get('/level1', (req, res) => {
@@ -22,7 +22,7 @@ module.exports = function (app, jsonParser, userState) {
 
         for (let i = 0; i < userState.length; i++) {
             if (userState[i].id === req.session.uid) {
-                if (!userState[i].levels[0] && parseInt(req.body.code) === code)
+                if (!userState[i].levels[0] && req.body.code == code)
                     userState[i].levels.push(level1Code);
                 saveList(userState);
                 foundUser = userState[i];
@@ -30,15 +30,13 @@ module.exports = function (app, jsonParser, userState) {
             }
         }
 
-        if (parseInt(req.body.code) === code && sessionValid) {
+        if (req.body.code == code && sessionValid) {
             res.send({ 'message': 'Success!!', code: level1Code, userArray: foundUser })
         } else {
             res.status(406);
             res.send({ 'message': 'Fail :(' });
         }
     });
-
-
 
 
 }

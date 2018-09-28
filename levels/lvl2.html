@@ -13,7 +13,7 @@
         <div class="loader"></div>
     </div>
     <div id="container">
-        <h1>SECOND PUZZLE</h1>
+        <h1>SECOND PUZZLE <span class="completed">(completed)</span></h1>
         <div id="page">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel mauris sit amet lorem fermentum
                 hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam congue, ligula at
@@ -28,6 +28,13 @@
 
     <script src="/js/axios.min.js"></script>
     <script src="/js/level2-client.js"></script>
+
+    <script>
+        if (JSON.parse(localStorage.levels)[1]) {
+            document.querySelector('.completed').style.display = 'inline';
+        }
+    </script>
+
 </body>
 
 </html>
