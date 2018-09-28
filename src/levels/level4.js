@@ -9,7 +9,7 @@ module.exports = function (app, jsonParser, userState) {
 
     app.get('/level4', (req, res) => {
         if (!req.session.uid) {     
-            res.redirect(403, '/start');
+            res.redirect(403, '/');
         } else {
             let user = userState.find(x=>x.id === req.session.uid);
             if(user && user.levels[2] === level3Code)

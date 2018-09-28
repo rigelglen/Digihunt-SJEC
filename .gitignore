@@ -74,4 +74,4 @@ typings/
 
 # Persistent store
 
-src/filename.json
+src/*.json

@@ -8,7 +8,13 @@ const cookieSession = require('cookie-session');
 
 const level8Code = require('./consts').codes[7];
 
-let userState = require("./filename.json");
+let userState = [];
+try {
+    userState = require("./filename.json");
+} catch (e) {
+    userState = [];
+}
+
 console.log(userState);
 
 let port = process.env.PORT || 8080;
@@ -22,10 +28,19 @@ app.use(express.static(path.join(__dirname, '../public'),
     { index: false, extensions: ['html'] }));
 
 app.get('/memsync', (req, res) => {
-    userList = require('./filename2.json');
+    userList = [];
+    try{
+        userList = require('./filename2.json');
+    }catch{
+        userList = [];
+    }
+
+    res.clearCookie("session");
+    res.clearCookie("session.sig");
+    
     console.log('Memlist is ' + JSON.stringify(userList, null, 4));
     saveList(userList);
-    res.redirect(200, '/level1');
+    res.send('<script>localStorage.clear(); window.location = "/"</script>');
 });
 
 require('./levels/level1.js')(app, jsonParser, userState);
@@ -37,10 +52,10 @@ require('./levels/level6.js')(app, jsonParser, userState);
 require('./levels/level7.js')(app, jsonParser, userState);
 require('./levels/level8.js')(app, jsonParser, userState);
 
-
 app.get('/', (req, res) => {
     if (req.session.uid) {
         res.sendFile(path.join(__dirname, '../levels/start-noinput.html'));
+        return;
     }
     res.sendFile(path.join(__dirname, '../levels/start.html'));
 });
