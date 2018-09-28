@@ -3,7 +3,7 @@ const level1Code = require('../consts').codes[0];
 const saveList = require('../consts').saveList;
 const path = require('path');
 
-let code = 12345677;
+let code = require('../consts').secrets[1];
 
 module.exports = function (app, jsonParser, userState) {
 

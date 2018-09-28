@@ -4,9 +4,11 @@ const saveList = require('./consts').saveList;
 const path = require('path');
 const app = express();
 const jsonParser = bodyParser.json();
-var cookieSession = require('cookie-session')
+const cookieSession = require('cookie-session');
 
-const userState = require("./filename.json");
+const level8Code = require('./consts').codes[7];
+
+let userState = require("./filename.json");
 console.log(userState);
 
 let port = process.env.PORT || 8080;
@@ -14,22 +16,48 @@ let port = process.env.PORT || 8080;
 app.use(cookieSession({
     name: 'session',
     keys: [`&1ztmd5C<DN2M!C@$Kob?Nq'{9TYe7`]
-  }))  
+}))
 
 app.use(express.static(path.join(__dirname, '../public'),
     { index: false, extensions: ['html'] }));
 
+app.get('/memsync', (req, res) => {
+    userList = require('./filename2.json');
+    console.log('Memlist is ' + JSON.stringify(userList, null, 4));
+    saveList(userList);
+    res.redirect(200, '/level1');
+});
 
 require('./levels/level1.js')(app, jsonParser, userState);
 require('./levels/level2.js')(app, jsonParser, userState);
 require('./levels/level3.js')(app, jsonParser, userState);
+require('./levels/level4.js')(app, jsonParser, userState);
+require('./levels/level5.js')(app, jsonParser, userState);
+require('./levels/level6.js')(app, jsonParser, userState);
+require('./levels/level7.js')(app, jsonParser, userState);
+require('./levels/level8.js')(app, jsonParser, userState);
 
-app.get('/start', (req, res) => {
-    if(req.session.uid){
+
+app.get('/', (req, res) => {
+    if (req.session.uid) {
         res.sendFile(path.join(__dirname, '../levels/start-noinput.html'));
     }
     res.sendFile(path.join(__dirname, '../levels/start.html'));
-})
+});
+
+app.get('/gratz', (req, res) => {
+    if (!req.session.uid) {
+        res.redirect(403, '/');
+    } else {
+        let user = userState.find(x => x.id === req.session.uid);
+        if (user.levels[7] === level8Code)
+            res.sendFile(path.join(__dirname, '../levels/gratz.html'));
+        else
+            res.redirect(403, '/');
+    }
+});
+
+
 
 app.post('/genID', jsonParser, (req, res) => {
     if (!req.session.uid) {

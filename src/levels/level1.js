@@ -2,12 +2,12 @@ const level1Code = require('../consts').codes[0];
 const saveList = require('../consts').saveList;
 const path = require('path');
 
-let code = 'kilgarah';
+let code = require('../consts').secrets[0];
 
 module.exports = function (app, jsonParser, userState) {
     app.get('/level1', (req, res) => {
         if (!req.session.uid) {
-            res.redirect(403, '/start');
+            res.redirect(403, '/');
         } else {
             res.sendFile(path.join(__dirname, '../../levels/lvl1.html'));
         }
