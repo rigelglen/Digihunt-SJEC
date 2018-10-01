@@ -9,7 +9,7 @@ button.addEventListener('click', () => {
     if (inp.value.trim().length > 4) {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/level8/auth', {
-            code: parseInt(inp.value.trim())
+            code: inp.value.trim()
         }).then((response) => {
             console.log(`Status is ${response.data.message}`);
             console.log(`Code is ${response.data.code}`);

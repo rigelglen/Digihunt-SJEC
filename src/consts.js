@@ -12,7 +12,7 @@ const saveList = (userState) => {
   });
 }
 
-const codes = ['kilgarah', 123456, 1234561, 1234562, 1234563, 1234563, 1234564, 1234565];
+const codes = ['kilgarah', 123456, 1234561, 1234562, 'flfflffff', 1234563, 1234564, 1234565];
 
 exports.codes = secretCodes;
 exports.saveList = saveList;

@@ -77,7 +77,7 @@ input#code {
     margin-right: 10px;
 }
 
-button#submitCode {
+button#submitCode, button#resetBtn {
     padding: 10px;
     border: 1px solid saddlebrown;
     background: rgba(246, 234, 213, 0.8);
