@@ -22,22 +22,22 @@ let port = process.env.PORT || 8080;
 app.use(cookieSession({
     name: 'session',
     keys: [`&1ztmd5C<DN2M!C@$Kob?Nq'{9TYe7`]
-}))
+}));
 
 app.use(express.static(path.join(__dirname, '../public'),
     { index: false, extensions: ['html'] }));
 
 app.get('/memsync', (req, res) => {
-    userList = [];
-    try{
+    let userList = [];
+    try {
         userList = require('./filename2.json');
-    }catch{
+    } catch{
         userList = [];
     }
 
     res.clearCookie("session");
     res.clearCookie("session.sig");
-    
+
     console.log('Memlist is ' + JSON.stringify(userList, null, 4));
     saveList(userList);
     res.send('<script>localStorage.clear(); window.location = "/"</script>');

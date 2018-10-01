@@ -1,6 +1,9 @@
+if (localStorage.levels && JSON.parse(localStorage.levels)[0]) {
+    document.querySelector('.completed').style.display = 'inline';
+}
+
 let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
-
 
 
 button.addEventListener('click', () => {

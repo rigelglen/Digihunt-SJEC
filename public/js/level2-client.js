@@ -1,3 +1,7 @@
+if (JSON.parse(localStorage.levels)[1]) {
+    document.querySelector('.completed').style.display = 'inline';
+}
+
 let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 
@@ -13,7 +17,7 @@ button.addEventListener('click', () => {
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
-            window.location.href='./level3';
+            window.location.href = './level3';
         }).catch((err) => {
             alert('Wrong code');
             document.querySelector(".overlay").style.display = 'none';

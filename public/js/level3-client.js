@@ -1,3 +1,13 @@
+if (JSON.parse(localStorage.levels)[2]) {
+    document.querySelector('.completed').style.display = 'inline';
+}
+
+const mySnakeBoard = new SNAKE.Board({
+    boardContainer: "snakeGame",
+    fullScreen: false,
+    width: 600
+});
+
 let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 
@@ -13,7 +23,7 @@ button.addEventListener('click', () => {
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
-            window.location.href='./level4'
+            window.location.href = './level4'
         }).catch((err) => {
             alert('Wrong code');
             document.querySelector(".overlay").style.display = 'none';
