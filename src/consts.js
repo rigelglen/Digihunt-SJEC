@@ -2,14 +2,17 @@ const secretCodes = ["JT8DZdWCtfn0ZrI", "kd32fMHUGAYcLFe", "ovssUvoCP5RTAeY", "J
 
 var fs = require("fs");
 
-const saveList = (userState) => {
-  console.log('UserState to be saved is \n' + JSON.stringify(userState, null, 4));
-  fs.writeFile("src/filename.json", JSON.stringify(userState, null, 4), "utf8", () => {
+const saveList = (userState, io) => {
+  const userStr = JSON.stringify(userState, null, 4)
+  console.log('UserState to be saved is \n' + userStr);
+
+  fs.writeFile("src/filename.json", userStr, "utf8", () => {
     console.log("saved");
   });
-  fs.writeFile("src/filename2.json", JSON.stringify(userState, null, 4), "utf8", () => {
+  fs.writeFile("src/filename2.json", userStr, "utf8", () => {
     console.log("saved backup");
   });
+  io.sockets.emit('userUpdate', JSON.stringify(userState));
 }
 
 const codes = ['kilgarah', 123456, 1234561, 1234562, 'flfflffff', 1234563, 1234564, 1234565];

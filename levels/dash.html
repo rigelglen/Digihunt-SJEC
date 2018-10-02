@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/jsonTree.css">
+    <style>
+        #ta{
+            width: 75%;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper"></div>
+
+    <textarea id="ta"></textarea>
+    <button id="sub">Submit</button>
+
+    <script src="/js/axios.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jsonTree.js"></script>
+    <script>
+        const wrapper = document.getElementById("wrapper");
+        const socket = io();
+        socket.on('userUpdate', (jsonData) => {
+            console.log(`${jsonData} recieved`);
+            wrapper.innerHTML = '';
+            try {
+                var data = JSON.parse(`${jsonData}`);
+            } catch (e) { }
+            console.log(data);
+            // Create json-tree
+            ta.value = JSON.stringify(data, null, 4);
+            let tree = jsonTree.create(data, wrapper);
+
+            // Expand all (or selected) child nodes of root (optional)
+            tree.expand();
+        });
+
+        const ta = document.getElementById('ta');
+        const btn = document.querySelector('#sub');
+
+        btn.addEventListener('click', () => {
+            let val = ta.value
+            console.log(val);
+
+            axios.post('/memparse/abcd1234', {
+                jsonData: JSON.parse(val)
+            }).then((response) => {
+                console.log('Sucess!');
+            }).catch((err) => {
+                console.log('Error');
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>

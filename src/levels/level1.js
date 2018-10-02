@@ -4,7 +4,7 @@ const path = require('path');
 
 let code = require('../consts').secrets[0];
 
-module.exports = function (app, jsonParser, userState) {
+module.exports = function (app, jsonParser, userState, io) {
     app.get('/level1', (req, res) => {
         if (!req.session.uid) {
             res.redirect(403, '/');
@@ -24,7 +24,7 @@ module.exports = function (app, jsonParser, userState) {
             if (userState[i].id === req.session.uid) {
                 if (!userState[i].levels[0] && req.body.code == code)
                     userState[i].levels.push(level1Code);
-                saveList(userState);
+                saveList(userState, io);
                 foundUser = userState[i];
                 sessionValid = true;
             }

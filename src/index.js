@@ -5,8 +5,12 @@ const path = require('path');
 const app = express();
 const jsonParser = bodyParser.json();
 const cookieSession = require('cookie-session');
+const fs = require('fs');
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 const level8Code = require('./consts').codes[7];
+const secret = 'abcd1234';
 
 let userState = [];
 try {
@@ -27,30 +31,54 @@ app.use(cookieSession({
 app.use(express.static(path.join(__dirname, '../public'),
     { index: false, extensions: ['html'] }));
 
-app.get('/memsync', (req, res) => {
-    let userList = [];
-    try {
-        userList = require('./filename2.json');
-    } catch{
-        userList = [];
+app.get('/memsync/:secret', (req, res) => {
+    if (req.params.secret === secret) {
+        let userList = [];
+        try {
+            userList = require('./filename2.json');
+        } catch{
+            userList = [];
+        }
+
+        res.clearCookie("session");
+        res.clearCookie("session.sig");
+
+        console.log('Memlist is ' + JSON.stringify(userList, null, 4));
+        saveList(userList, io);
+        res.send('<script>localStorage.clear(); window.location = "/"</script>');
     }
-
-    res.clearCookie("session");
-    res.clearCookie("session.sig");
-
-    console.log('Memlist is ' + JSON.stringify(userList, null, 4));
-    saveList(userList);
-    res.send('<script>localStorage.clear(); window.location = "/"</script>');
+    else {
+        res.redirect(403, '/');
+    }
 });
 
-require('./levels/level1.js')(app, jsonParser, userState);
-require('./levels/level2.js')(app, jsonParser, userState);
-require('./levels/level3.js')(app, jsonParser, userState);
-require('./levels/level4.js')(app, jsonParser, userState);
-require('./levels/level5.js')(app, jsonParser, userState);
-require('./levels/level6.js')(app, jsonParser, userState);
-require('./levels/level7.js')(app, jsonParser, userState);
-require('./levels/level8.js')(app, jsonParser, userState);
+app.post('/memparse/:secret', jsonParser, (req, res) => {
+    if (req.params.secret === secret) {
+        let userList = [];
+        console.log('DATA ISSSSSSS' + JSON.stringify(req.body.jsonData, null, 4));
+        try {
+            userList = req.body.jsonData;
+        } catch{
+            userList = [];
+        }
+
+        console.log('Memlist is ' + JSON.stringify(userList, null, 4));
+        saveList(userList, io);
+        res.sendStatus(200);
+    }
+    else {
+        res.redirect(403, '/');
+    }
+});
+
+require('./levels/level1.js')(app, jsonParser, userState, io);
+require('./levels/level2.js')(app, jsonParser, userState, io);
+require('./levels/level3.js')(app, jsonParser, userState, io);
+require('./levels/level4.js')(app, jsonParser, userState, io);
+require('./levels/level5.js')(app, jsonParser, userState, io);
+require('./levels/level6.js')(app, jsonParser, userState, io);
+require('./levels/level7.js')(app, jsonParser, userState, io);
+require('./levels/level8.js')(app, jsonParser, userState, io);
 
 app.get('/', (req, res) => {
     if (req.session.uid) {
@@ -73,6 +101,24 @@ app.get('/gratz', (req, res) => {
 });
 
 
+app.get('/dash/:secret', (req, res) => {
+    if (req.params.secret === secret) {
+        res.sendFile(path.join(__dirname, '../levels/dash.html'));
+    } else {
+        res.redirect(403, '/');
+    }
+});
+
+app.get('/wipe/:secret', (req, res) => {
+    if (req.params.secret === secret) {
+        fs.writeFileSync("src/filename.json", JSON.stringify([], null, 4), "utf8");
+        fs.writeFileSync("src/filename2.json", JSON.stringify([], null, 4), "utf8");
+        userState = [];
+        res.redirect(200, '/');
+    } else {
+        res.redirect(403, '/');
+    }
+});
 
 app.post('/genID', jsonParser, (req, res) => {
     if (!req.session.uid) {
@@ -89,11 +135,23 @@ app.post('/genID', jsonParser, (req, res) => {
                 id: req.body.uid,
                 levels: []
             });
-            saveList(userState);
+            saveList(userState, io);
         }
     }
     let response = { id: req.session.uid };
     res.send(response);
-})
+});
 
-app.listen(port);
+io.on('connection', function (socket) {
+    console.log('a user connected');
+    io.sockets.emit('userUpdate', JSON.stringify(userState));
+
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+});
+
+
+http.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});

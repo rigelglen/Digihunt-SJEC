@@ -5,14 +5,14 @@ const path = require('path');
 
 let code = require('../consts').secrets[6];
 
-module.exports = function (app, jsonParser, userState) {
+module.exports = function (app, jsonParser, userState, io) {
 
     app.get('/level7', (req, res) => {
-        if (!req.session.uid) {     
+        if (!req.session.uid) {
             res.redirect(403, '/');
         } else {
-            let user = userState.find(x=>x.id === req.session.uid);
-            if(user && user.levels[5] === level6Code)
+            let user = userState.find(x => x.id === req.session.uid);
+            if (user && user.levels[5] === level6Code)
                 res.sendFile(path.join(__dirname, '../../levels/lvl7.html'));
             else
                 res.redirect(403, '/level6');
@@ -21,7 +21,7 @@ module.exports = function (app, jsonParser, userState) {
 
 
     app.post('/level7/auth', jsonParser, (req, res) => {
-        console.log('Code is '+req.body.code);
+        console.log('Code is ' + req.body.code);
         console.log('session' + req.session.uid);
         let foundUser;
         let sessionValid = false;
@@ -30,7 +30,7 @@ module.exports = function (app, jsonParser, userState) {
             if (userState[i].id === req.session.uid) {
                 if (req.body.code == code && !userState[i].levels[6])
                     userState[i].levels.push(level7Code);
-                saveList(userState);
+                saveList(userState, io);
                 foundUser = userState[i];
                 sessionValid = true;
             }
