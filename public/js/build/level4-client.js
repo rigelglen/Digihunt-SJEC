@@ -38,14 +38,14 @@ var scratchGame = function () {
   var x;
 
   function reset() {
-    grid = [[-1, -1, -1, -1, 0, -1, 5, -1, -1], [1, 1, 1, -1, 1, -1, 1, -1, -1], [1, -1, 1, 1, 1, -1, 1, 1, 1], [1, -1, -1, -1, -1, -1, -1, -1, 1], [1, 1, 1, -1, -1, -1, -1, -1, 1], [-1, -1, 1, -1, -1, 1, 1, 1, 1], [-1, 1, 1, -1, -1, 1, -1, 1, 1], [-1, 1, -1, -1, 1, 1, -1, -1, -1], [-1, 1, 1, 1, 1, -1, -1, -1, -1]]; // 0 means up, 2 means right, 3 means down, 4 means left
+    grid = [[-1, -1, -1, -1, 3, -1, 5, -1, -1], [1, 1, 1, -1, 1, -1, 1, -1, -1], [1, -1, 1, 1, 1, -1, 1, 1, 1], [1, -1, -1, -1, -1, -1, -1, -1, 1], [1, 1, 1, -1, -1, -1, -1, -1, 1], [-1, -1, 1, -1, -1, 1, 1, 1, 1], [-1, 1, 1, -1, -1, 1, -1, 1, 1], [-1, 1, -1, -1, 1, 1, -1, -1, -1], [-1, 1, 1, 1, 1, -1, -1, -1, -1]]; // 0 means up, 2 means right, 3 means down, 4 means left
     // 1 means allowed
     // -1 means not allowed
     // 5 means final solution
 
     currX = 0;
     currY = 4;
-    currDirection = 0;
+    currDirection = 3;
     x = grid[0].length;
     renderGrid();
   }
@@ -65,7 +65,7 @@ var scratchGame = function () {
     }
 
     ;
-    var gridItems = document.querySelectorAll('.grid');
+    var gridItems = document.querySelectorAll('#scratch .grid');
     var flatGrid = flatten(grid);
 
     for (var i = 0; i < gridItems.length; i++) {
@@ -89,7 +89,7 @@ var scratchGame = function () {
           gridItems[i].style.transform = "rotate(270deg)";
         }
       } else if (flatGrid[i] === 5) {
-        gridItems[i].style.backgroundColor = "darkgreen";
+        gridItems[i].style.backgroundColor = "#013801";
       }
     }
   }
@@ -97,6 +97,7 @@ var scratchGame = function () {
   function evalDirections(str) {
     var count = 0;
     reset();
+    str = str.replace(/ /g, '').toLowerCase();
 
     for (var i = 0; i < str.length; i++) {
       var letter = str.charAt(i);

@@ -128,7 +128,7 @@ function enable() {
 
 function congratulations() {
   if (matchedCard.length == cards.length) {
-    var code = 1234563; // show congratulations modal
+    var code = 'total-recall'; // show congratulations modal
 
     swal('Sucess', 'Your code is ' + code, 'info');
   }

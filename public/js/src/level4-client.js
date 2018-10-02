@@ -42,7 +42,7 @@ const scratchGame = (() => {
     function reset() {
         grid =
             [
-                [-1, -1, -1, -1, 0, -1, 5, -1, -1],
+                [-1, -1, -1, -1, 3, -1, 5, -1, -1],
                 [1, 1, 1, -1, 1, -1, 1, -1, -1],
                 [1, -1, 1, 1, 1, -1, 1, 1, 1],
                 [1, -1, -1, -1, -1, -1, -1, -1, 1],
@@ -59,7 +59,7 @@ const scratchGame = (() => {
         // 5 means final solution
         currX = 0;
         currY = 4;
-        currDirection = 0;
+        currDirection = 3;
         x = grid[0].length;
         renderGrid();
     }
@@ -74,7 +74,7 @@ const scratchGame = (() => {
                 document.getElementById('scratch').appendChild(gridItem);
             };
         };
-        let gridItems = document.querySelectorAll('.grid');
+        let gridItems = document.querySelectorAll('#scratch .grid');
         let flatGrid = flatten(grid);
 
         for (var i = 0; i < gridItems.length; i++) {
@@ -97,7 +97,7 @@ const scratchGame = (() => {
                     gridItems[i].style.transform = "rotate(270deg)";
                 }
             } else if (flatGrid[i] === 5) {
-                gridItems[i].style.backgroundColor = "darkgreen";
+                gridItems[i].style.backgroundColor = "#013801";
             }
 
         }
@@ -106,6 +106,7 @@ const scratchGame = (() => {
     function evalDirections(str) {
         let count = 0;
         reset();
+        str = str.replace(/ /g,'').toLowerCase();
 
         for (var i = 0; i < str.length; i++) {
             let letter = str.charAt(i);

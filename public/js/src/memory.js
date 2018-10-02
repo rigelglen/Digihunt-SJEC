@@ -126,7 +126,7 @@ function enable() {
 // @description congratulations when all cards match, show modal and moves, time and rating
 function congratulations() {
     if (matchedCard.length == cards.length) {
-        let code = 1234563;
+        let code = 'total-recall';
         // show congratulations modal
         swal('Sucess', 'Your code is ' + code, 'info')
     };

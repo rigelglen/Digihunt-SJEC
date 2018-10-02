@@ -15,6 +15,28 @@
             margin-top: 100px;
             margin-bottom: 100px;
         }
+        .grid{
+            width: 66.6667px; 
+            height: 66.6667px;
+        }
+        #legend span {
+            display: inline-block;
+            margin-left: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        #legend>div {
+            display: flex;
+            align-items: center;
+        }
+
+         div#legend {
+            width: 400px;
+            float: right;
+            margin-left: 30px;
+            margin-top: 10px;
+        }
         </style>
 </head>
 
@@ -30,12 +52,33 @@
         <h1>Chapter 5: Into The Forest Of Lost Souls<span class="completed">(completed)</span></h1>
 
         <div id="page">
+            <div id="legend">
+                <div>
+                    <div class="grid" style="background-color: yellow;"></div>
+                    <span>-- You</span>
+                </div>
+                <div>
+                    <div class="grid" style="background-color: red;"></div>
+                    <span>-- Wall (cannot pass through this)</span>
+                </div>
+                <div>
+                    <div class="grid" style="background-color: green;"></div>
+                    <span>-- Pathway (can pass through this)</span>
+                </div>
+                <div>
+                    <div class="grid" style="background-color: #013801;"></div>
+                    <span>-- Destination (go here to progress)</span>
+                </div>
+            </div>
             <p>The first task before you, is the crossing of the greatly feared Forest of Lost Souls. The trees are
                 draped with the tears of the weeping and the ground is rough from be rarely travelled on. Do not stray
                 from the path, lest the forest claim you for its own.<br><br>
+            Type in the sequence of moves you need to take to reach your destination in the text box below. You can press the GO button to preview your moves.<br><br>
                 L – Turn Left<br><br>
                 R – Turn Right<br><br>
-                F – Go Forward.
+                F – Go Forward.<br><br>
+                <p>Example: Enter FFRF</p>
+
             </p>
 
             <div id="scratch">

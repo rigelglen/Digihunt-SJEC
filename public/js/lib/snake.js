@@ -943,7 +943,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmTryAgain.style.zIndex = index;
             elmTryAgain.style.display = "block";
             me.setBoardState(0);
-            if(mySnake.snakeLength > 50){
+            if(mySnake.snakeLength > 65){
                 swal('Success', 'The Secret Code is ' + code, 'info');
             }
         };

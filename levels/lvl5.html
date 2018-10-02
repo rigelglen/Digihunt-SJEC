@@ -3,10 +3,23 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Chapter 6: Don’t Shop, Or You Drop</title>
+    <title>Chapter 6: The Insurmountable Towers</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/level0.css">
-    <link rel="stylesheet" href="/css/market.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/hanoi.css">
+    <style>
+        ol{
+            display: inline-block;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+        li{
+            text-align: left;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,43 +31,40 @@
         <div class="loader"></div>
     </div>
     <div id="container">
-        <h1>Chapter 6: Don’t Shop, Or You Drop<span class="completed">(completed)</span></h1>
+        <h1>Chapter 6: The Insurmountable Towers<span class="completed">(completed)</span></h1>
 
         <div id="page">
             <p>The forest has been conquered, and you’ve escaped its claws. Well done, the Gods seem to have you in
-                their favour. Now, before you stands the Grand Stardew Market, in all its glory. You the seek the
-                wizard from the magical realm of Karoun, who’s dwelling is across the market.<br><br>
-                Make it through persistent vendors, scathing hawkers and babbling sellers to get to where you need to be. </p>
+                their favour. Now, before you stands the Grand Stardew Tower, in all its glory. You the seek the wizard
+                Hanoi
+                from the magical realm of Karoun, who lives at the top of this formidable monilith. To get to the top,
+                you’ll need a magical ladder, which you can obtain by conquering the problem presented to you.<br><br>
 
+                <strong>Instructions:</strong>
+                <ol>
+                    <li>You’ll have to move all the disks to either the second or the third peg.</li>
+                    <li>All the disks should be on a single peg.</li>
+                    <li>A bigger disk cannot be placed on a smaller disk.</li>
+                </ol>
 
-            <div id="market">
-                <div class="marketSection" id="welcomeSection">
-                        <h2>WELCOME TO THE GRAND STARDEW MARKET!!!!</h2>
+                <div id="canves">
+                    <div class="restart"><i class="fa fa-redo"></i></div>
+                    <div class="curtain"></div>
+
+                    <ul class="tower" id="tower-1"></ul>
+                    <ul class="tower" id="tower-2"></ul>
+                    <ul class="tower" id="tower-3"></ul>
                 </div>
-                <div class="marketSection" id="popupSection1">
-                        The forest has been conquered, and you’ve escaped its claws. Well done, the Gods seem to have you in
-                        their favour. Now, before you stands the Grand Stardew Market, in all its glory. You the seek the
-                        wizard from the magical realm of Karoun, who’s dwelling is across the market.<br><br>
-                        Make it through persistent vendors, scathing hawkers and babbling sellers to get to where you need to be. The forest has been conquered, and you’ve escaped its claws. Well done, the Gods seem to have you in
-                        their favour. Now, before you stands the Grand Stardew Market, in all its glory. You the seek the
-                        wizard from the magical realm of Karoun, who’s dwelling is across the market.<br><br>
-                        Make it through persistent vendors, scathing hawkers and babbling sellers to get to where you need to be. The forest has been conquered, and you’ve escaped its claws. Well done, the Gods seem to have you in
-                        their favour. Now, before you stands the Grand Stardew Market, in all its glory. You the seek the
-                        wizard from the magical realm of Karoun, who’s dwelling is across the market.<br><br>
-                        Make it through persistent vendors, scathing hawkers and babbling sellers to get to where you need to be. The forest has been conquered, and you’ve escaped its claws. Well done, the Gods seem to have you in
-                        their favour. Now, before you stands the Grand Stardew Market, in all its glory. You the seek the
-                        wizard from the magical realm of Karoun, who’s dwelling is across the market.<br><br>
-                        Make it through persistent vendors, scathing hawkers and babbling sellers to get to where you need to be. 
-                </div>
-            </div>
 
-            <div id="controls">
-                <input id="code" type="text">
-                <button id="submitCode">GO</button>
-            </div>
+
+                <div id="controls">
+                    <input id="code" type="text">
+                    <button id="submitCode">GO</button>
+                </div>
         </div>
     </div>
     <script src="/js/lib/swal.js"></script>
+    <script src="/js/lib/jquery.js"></script>
     <script src="/js/lib/axios.min.js"></script>
     <script src="/js/lib/scrollMonitor.js"></script>
     <script src="/js/build/level5-client.js"></script>

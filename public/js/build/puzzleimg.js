@@ -268,7 +268,7 @@ function imgToPuzzle(slc, cols, rows, solve, callback) {
   }
 }
 
-var puz1 = new PuzzleImg('puz1', '/img/jigsaw.jpg', 5, 4, 600, 450);
+var puz1 = new PuzzleImg('puz1', '/img/jigsaw.jpg', 6, 7, 600, 450);
 
 puz1.solved = function () {
   var code = "Kilgarah";
