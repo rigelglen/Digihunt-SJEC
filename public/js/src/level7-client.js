@@ -9,15 +9,12 @@ let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 
 
-
 button.addEventListener('click', () => {
     if (inp.value.trim().length > 1) {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/level7/auth', {
             code: inp.value.trim()
         }).then((response) => {
-            console.log(`Status is ${response.data.message}`);
-            console.log(`Code is ${response.data.code}`);
 
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);

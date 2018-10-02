@@ -67,7 +67,6 @@ const scratchGame = (() => {
         isReset = true;
         if (t) {
             for (var i = 0; i < t.length; i++) {
-                console.log(t[i]);
                 clearInterval(t[i]);
             }
         }
@@ -184,8 +183,6 @@ const scratchGame = (() => {
         axios.post('/level4/auth', {
             code: "fddFfg46@rfdfd"
         }).then((response) => {
-            console.log(`Status is ${response.data.message}`);
-            console.log(`Code is ${response.data.code}`);
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));

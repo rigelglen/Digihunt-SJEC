@@ -16,8 +16,6 @@ button.addEventListener('click', () => {
         axios.post('/level2/auth', {
             code: inp.value.trim()
         }).then((response) => {
-            console.log(`Status is ${response.data.message}`);
-            console.log(`Code is ${response.data.code}`);
 
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);

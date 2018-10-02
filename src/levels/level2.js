@@ -21,15 +21,17 @@ module.exports = function (app, jsonParser, userState, io) {
 
 
     app.post('/level2/auth', jsonParser, (req, res) => {
-        console.log(req.body.code);
-        console.log('session' + req.session.uid);
         let foundUser;
         let sessionValid = false;
 
         for (let i = 0; i < userState.length; i++) {
             if (userState[i].id === req.session.uid) {
-                if (req.body.code == code && !userState[i].levels[1])
+                if (req.body.code == code && !userState[i].levels[1]) {
                     userState[i].levels.push(level2Code);
+                    var dt = new Date();
+                    var utcDate = dt.toUTCString();
+                    userState[i]["completed2"] = utcDate;
+                }
                 saveList(userState, io);
                 foundUser = userState[i];
                 sessionValid = true;
@@ -37,7 +39,7 @@ module.exports = function (app, jsonParser, userState, io) {
         }
 
         if (req.body.code == code && sessionValid) {
-            res.send({ 'message': 'Success!!', code: level2Code, userArray: foundUser , id: req.session.uid})
+            res.send({ 'message': 'Success!!', code: level2Code, userArray: foundUser, id: req.session.uid })
         } else {
             res.status(406);
             res.send({ 'message': 'Fail :(' });

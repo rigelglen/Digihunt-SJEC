@@ -1,8 +1,8 @@
 axios.get(`/getLevels/${localStorage.id}`).then((response) => {
-    localStorage.levels = JSON.stringify(response.data.userArray.levels);
-    if (JSON.parse(localStorage.levels)[4]) {
-        document.querySelector('.completed').style.display = 'inline';
-    }
+	localStorage.levels = JSON.stringify(response.data.userArray.levels);
+	if (JSON.parse(localStorage.levels)[4]) {
+		document.querySelector('.completed').style.display = 'inline';
+	}
 });
 
 let button = document.querySelector('#submitCode');
@@ -11,30 +11,28 @@ let inp = document.querySelector('#code');
 
 
 button.addEventListener('click', () => {
-    if (inp.value.trim().length > 4) {
-        document.querySelector(".overlay").style.display = 'flex';
-        axios.post('/level5/auth', {
-            code: inp.value.trim()
-        }).then((response) => {
-            console.log(`Status is ${response.data.message}`);
-            console.log(`Code is ${response.data.code}`);
+	if (inp.value.trim().length > 4) {
+		document.querySelector(".overlay").style.display = 'flex';
+		axios.post('/level5/auth', {
+			code: inp.value.trim()
+		}).then((response) => {
 
-            document.querySelector(".overlay").style.display = 'none';
-            localStorage.setItem("id", response.data.id);
-            localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
-            window.location.href = './level6';
-        }).catch((err) => {
-            swal('Error', 'Wrong code', 'error');
-            document.querySelector(".overlay").style.display = 'none';
-        });
-    } else {
-        swal('Error', 'Incorrect input', 'error');
-    }
+			document.querySelector(".overlay").style.display = 'none';
+			localStorage.setItem("id", response.data.id);
+			localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
+			window.location.href = './level6';
+		}).catch((err) => {
+			swal('Error', 'Wrong code', 'error');
+			document.querySelector(".overlay").style.display = 'none';
+		});
+	} else {
+		swal('Error', 'Incorrect input', 'error');
+	}
 });
 
-$(document).ready(function() {
-    // Variables
-    let code = 'knock-knock'
+$(document).ready(function () {
+	// Variables
+
 	var holding = [],
 		moves,
 		disksNum = 5,
@@ -45,8 +43,8 @@ $(document).ready(function() {
 		$scorePanel = $canves.find('#score-panel'),
 		$movesCount = $scorePanel.find('#moves-num'),
 		$ratingStars = $scorePanel.find('i'),
-		rating = 3;
-	
+		rating = 3,
+		code = 'knock-knock';
 	// Set Rating and final Score
 	function setRating(moves) {
 		if (moves === 127) {
@@ -58,7 +56,7 @@ $(document).ready(function() {
 		} else if (moves >= 229) {
 			$ratingStars.eq(0).removeClass('fa-star').addClass('fa-star-o');
 			rating = 0;
-		}	
+		}
 		return { score: rating };
 	};
 
@@ -71,7 +69,7 @@ $(document).ready(function() {
 		for (var i = 1; i <= disksNum; i++) {
 			tower.prepend($('<li class="disk disk-' + i + '" data-value="' + i + '"></li>'));
 		}
-		$ratingStars.each(function() {
+		$ratingStars.each(function () {
 			$(this).removeClass('fa-star-o').addClass('fa-star');
 		});
 	}
@@ -83,10 +81,10 @@ $(document).ready(function() {
 
 		if (moves > minMoves - 1) {
 			if ($tower.eq(1).children().length === disksNum || $tower.eq(2).children().length === disksNum) {
-                swal('Sucess', 'The code is ' + code, 'info');				
+				swal('Sucess', 'The code is ' + code, 'info');
 			}
 		}
-		
+
 		setRating(moves);
 	}
 
@@ -109,31 +107,31 @@ $(document).ready(function() {
 			holding[0] = topDiskValue;
 		}
 	}
-	
+
 	initGame($tower.eq(0));
-	
+
 	// Event Handlers
-	$canves.on('click', '.tower', function() {
+	$canves.on('click', '.tower', function () {
 		var $this = $(this);
 		tower($this);
 	});
-	
-	$restart.on('click', function() {
+
+	$restart.on('click', function () {
 		swal({
-				allowEscapeKey: false,
-				allowOutsideClick: false,
-				title: 'Are you sure?',
-				text: "Your progress will be Lost!",
-				type: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#8bc34a',
-				cancelButtonColor: '#e91e63',
-				confirmButtonText: 'Yes, Restart Game!'
-		}).then(function(isConfirm) {
-				if (isConfirm) {
-					initGame($tower.eq(0));
-				}
-			})
+			allowEscapeKey: false,
+			allowOutsideClick: false,
+			title: 'Are you sure?',
+			text: "Your progress will be Lost!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#8bc34a',
+			cancelButtonColor: '#e91e63',
+			confirmButtonText: 'Yes, Restart Game!'
+		}).then(function (isConfirm) {
+			if (isConfirm) {
+				initGame($tower.eq(0));
+			}
+		})
 	});
 });
 
