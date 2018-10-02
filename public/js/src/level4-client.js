@@ -3,7 +3,7 @@ axios.get(`/getLevels/${localStorage.id}`).then((response) => {
     if (JSON.parse(localStorage.levels)[3]) {
         document.querySelector('.completed').style.display = 'inline';
     }
-    
+
 });
 
 let button = document.querySelector('#submitCode');
@@ -41,18 +41,24 @@ const scratchGame = (() => {
 
     function reset() {
         grid =
-            [[1, 1, 1, -1, 1, 1],
-            [1, 1, 0, -1, 1, 1],
-            [1, 1, 1, -1, 1, 1],
-            [1, 1, 1, -1, 1, 1],
-            [5, 1, 1, -1, 1, 1],
-            [1, 1, 1, -1, 1, 1]];
+            [
+                [-1, -1, -1, -1, 0, -1, 5, -1, -1],
+                [1, 1, 1, -1, 1, -1, 1, -1, -1],
+                [1, -1, 1, 1, 1, -1, 1, 1, 1],
+                [1, -1, -1, -1, -1, -1, -1, -1, 1],
+                [1, 1, 1, -1, -1, -1, -1, -1, 1],
+                [-1, -1, 1, -1, -1, 1, 1, 1, 1],
+                [-1, 1, 1, -1, -1, 1, -1, 1, 1],
+                [-1, 1, -1, -1, 1, 1, -1, -1, -1],
+                [-1, 1, 1, 1, 1, -1, -1, -1, -1]
+            ]
+
         // 0 means up, 2 means right, 3 means down, 4 means left
         // 1 means allowed
         // -1 means not allowed
         // 5 means final solution
-        currX = 1;
-        currY = 2;
+        currX = 0;
+        currY = 4;
         currDirection = 0;
         x = grid[0].length;
         renderGrid();
@@ -103,10 +109,10 @@ const scratchGame = (() => {
 
         for (var i = 0; i < str.length; i++) {
             let letter = str.charAt(i);
-            if(!(letter === 'f' || letter === 'r' || letter === 'l' )){
+            if (!(letter === 'f' || letter === 'r' || letter === 'l')) {
                 swal('Error', 'Incorrect input', 'error');
-                inp.value='';                
-                return;            
+                inp.value = '';
+                return;
             }
         }
 
@@ -161,7 +167,7 @@ const scratchGame = (() => {
     function handleWin() {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/level4/auth', {
-            code: inp.value.trim()
+            code: "fddFfg46@rfdfd"
         }).then((response) => {
             console.log(`Status is ${response.data.message}`);
             console.log(`Code is ${response.data.code}`);

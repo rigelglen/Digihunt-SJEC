@@ -2,7 +2,7 @@ let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 
 button.addEventListener('click', () => {
-    if (inp.value.trim().length > 5) {
+    if (inp.value.trim().length > 2) {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/genID', {
             uid: inp.value.trim()

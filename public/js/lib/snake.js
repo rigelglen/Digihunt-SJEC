@@ -936,7 +936,7 @@ SNAKE.Board = SNAKE.Board || (function() {
         * @method handleDeath
         */ 
         me.handleDeath = function() {
-            let code = 12345688;
+            var code = 'basilisk';
             var index = Math.max(getNextHighestZIndex( mySnake.snakeBody), getNextHighestZIndex( {tmp:{elm:myFood.getFoodElement()}} ));
             elmContainer.removeChild(elmTryAgain);
             elmContainer.appendChild(elmTryAgain);
@@ -944,7 +944,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmTryAgain.style.display = "block";
             me.setBoardState(0);
             if(mySnake.snakeLength > 50){
-                swal('Success', 'Code is ' + code, 'info');
+                swal('Success', 'The Secret Code is ' + code, 'info');
             }
         };
         

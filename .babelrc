@@ -1,13 +1,6 @@
 {
   "presets": [
-    "@babel/preset-env",
-    [
-      "minify",
-      {
-        "builtIns": false,
-        "evaluate": false,
-        "mangle": false
-      }
-    ]
+    "@babel/preset-env"
+    
   ]
 }

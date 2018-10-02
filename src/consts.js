@@ -15,7 +15,7 @@ const saveList = (userState, io) => {
   io.sockets.emit('userUpdate', JSON.stringify(userState));
 }
 
-const codes = ['kilgarah', 123456, 1234561, 'flfflffff', 1234562, 1234563, 1234564];
+const codes = ['kilgarah', 1621, 'basilisk', 'fddFfg46@rfdfd', 1234562, 1234563, 35];
 
 exports.codes = secretCodes;
 exports.saveList = saveList;

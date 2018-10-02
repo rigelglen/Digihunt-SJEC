@@ -1,0 +1,35 @@
+#market {
+    border: 1px solid black;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.marketSection{
+    width: 100%;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+
+.marketSection h2{
+    text-align: center;
+}
+
+#welcomeSection{
+    background: url('/img/welcome-texture.png');
+    color: white;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#popupSection1{
+    background: url('/img/max.png');
+    color: white;
+}
+
+#welcomeSection h2{
+    text-shadow: 0px 0px 10px black !important;
+    font-family: 'Montserrat';
+    font-size: 2em;
+}

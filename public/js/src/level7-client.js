@@ -11,7 +11,7 @@ let inp = document.querySelector('#code');
 
 
 button.addEventListener('click', () => {
-    if (inp.value.trim().length > 4) {
+    if (inp.value.trim().length > 1) {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/level7/auth', {
             code: inp.value.trim()

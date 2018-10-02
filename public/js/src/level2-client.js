@@ -11,7 +11,7 @@ let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 
 button.addEventListener('click', () => {
-    if (inp.value.trim().length > 4) {
+    if (inp.value.trim().length > 3) {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/level2/auth', {
             code: inp.value.trim()

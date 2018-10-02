@@ -34,6 +34,7 @@ body {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+  color: white;
 }
 
 /* Grouping content
@@ -363,6 +364,8 @@ html{
   justify-content: center;
   align-items: center;
   display: none;
+  top: 0px;
+  left: 0px;
 }
 
 .loader {
@@ -400,6 +403,10 @@ html{
 
 .cf:after {
     clear: both;
+}
+
+p[align=center]{
+  font-weight: bold;
 }
 
 /**
