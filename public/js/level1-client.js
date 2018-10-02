@@ -1,11 +1,12 @@
 axios.get(`/getLevels/${localStorage.id}`).then((response) => {
     console.log(response.data.userArray.levels);
     localStorage.levels = JSON.stringify(response.data.userArray.levels);
+    if (localStorage.levels && JSON.parse(localStorage.levels)[0]) {
+        document.querySelector('.completed').style.display = 'inline';
+    }
 });
 
-if (localStorage.levels && JSON.parse(localStorage.levels)[0]) {
-    document.querySelector('.completed').style.display = 'inline';
-}
+
 
 let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');

@@ -1,11 +1,12 @@
 axios.get(`/getLevels/${localStorage.id}`).then((response) => {
     console.log(response.data.userArray.levels);
     localStorage.levels = JSON.stringify(response.data.userArray.levels);
+    if (JSON.parse(localStorage.levels)[2]) {
+        document.querySelector('.completed').style.display = 'inline';
+    }
 });
 
-if (JSON.parse(localStorage.levels)[2]) {
-    document.querySelector('.completed').style.display = 'inline';
-}
+
 
 const mySnakeBoard = new SNAKE.Board({
     boardContainer: "snakeGame",

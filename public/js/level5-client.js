@@ -1,15 +1,16 @@
 axios.get(`/getLevels/${localStorage.id}`).then((response) => {
     console.log(response.data.userArray.levels);
     localStorage.levels = JSON.stringify(response.data.userArray.levels);
+    if (JSON.parse(localStorage.levels)[4]) {
+        document.querySelector('.completed').style.display = 'inline';
+    }
+    
 });
 
 let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 let resetBtn = document.querySelector("#resetBtn");
 
-if (JSON.parse(localStorage.levels)[4]) {
-    document.querySelector('.completed').style.display = 'inline';
-}
 
 resetBtn.addEventListener('click', () => {
     scratchGame.reset();
