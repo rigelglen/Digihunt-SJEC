@@ -37,7 +37,7 @@ module.exports = function (app, jsonParser, userState, io) {
         }
 
         if (req.body.code == code && sessionValid) {
-            res.send({ 'message': 'Success!!', code: level6Code, userArray: foundUser })
+            res.send({ 'message': 'Success!!', code: level6Code, userArray: foundUser , id: req.session.uid})
         } else {
             res.status(406);
             res.send({ 'message': 'Fail :(' });
