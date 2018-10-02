@@ -1,3 +1,6 @@
 {   
-    "ignore": ["src/filename.json"] 
+    "ignore": ["src/filename.json", "public/js/build/*.js"],
+    "events": {
+        "start": "npm run build"
+      } 
 }
