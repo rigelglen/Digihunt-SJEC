@@ -6,7 +6,17 @@
     <title>Level 6</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/level0.css">
-
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/memory.css">
+    <style>
+        body{
+            display: block;
+        }
+        div#container{
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,6 +35,58 @@
                 hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam congue, ligula at
                 mattis mollis, magna massa semper diam, et blandit lectus lacus et nulla. Vivamus feugiat hendrerit
                 erat, sit amet feugiat sapien posuere vel. </p>
+
+            <ul class="deck" id="card-deck">
+                <li class="card" type="user">
+                    <i class="fa fa-user"></i>
+                </li>
+                <li class="card" type="ad">
+                    <i class="fa fa-ad"></i>
+                </li>
+                <li class="card match" type="anchor">
+                    <i class="fa fa-anchor"></i>
+                </li>
+                <li class="card" type="bolt">
+                    <i class="fa fa-bolt"></i>
+                </li>
+                <li class="card" type="cube">
+                    <i class="fa fa-cube"></i>
+                </li>
+                <li class="card match" type="anchor">
+                    <i class="fa fa-anchor"></i>
+                </li>
+                <li class="card" type="leaf">
+                    <i class="fa fa-leaf"></i>
+                </li>
+                <li class="card" type="bicycle">
+                    <i class="fa fa-bicycle"></i>
+                </li>
+                <li class="card" type="user">
+                    <i class="fa fa-user"></i>
+                </li>
+                <li class="card" type="bomb">
+                    <i class="fa fa-bomb"></i>
+                </li>
+                <li class="card" type="leaf">
+                    <i class="fa fa-leaf"></i>
+                </li>
+                <li class="card" type="bomb">
+                    <i class="fa fa-bomb"></i>
+                </li>
+                <li class="card open show" type="bolt">
+                    <i class="fa fa-bolt"></i>
+                </li>
+                <li class="card" type="bicycle">
+                    <i class="fa fa-bicycle"></i>
+                </li>
+                <li class="card" type="ad">
+                    <i class="fa fa-ad"></i>
+                </li>
+                <li class="card" type="cube">
+                    <i class="fa fa-cube"></i>
+                </li>
+            </ul>
+
             <div id="controls">
                 <input id="code" type="text">
                 <button id="submitCode">GO</button>
@@ -34,6 +96,7 @@
     <script src="/js/lib/swal.js"></script>
     <script src="/js/lib/axios.min.js"></script>
     <script src="/js/build/level6-client.js"></script>
+    <script src="/js/build/memory.js"></script>
 
 </body>
 
