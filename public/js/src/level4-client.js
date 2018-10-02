@@ -62,6 +62,7 @@ const scratchGame = (() => {
         currDirection = 3;
         x = grid[0].length;
         renderGrid();
+        ignore = true;
     }
 
     function renderGrid() {
@@ -102,11 +103,13 @@ const scratchGame = (() => {
 
         }
     }
-
+    let ignore = false;
     function evalDirections(str) {
         let count = 0;
         reset();
-        str = str.replace(/ /g,'').toLowerCase();
+        ignore = false;
+
+        str = str.replace(/ /g, '').toLowerCase();
 
         for (var i = 0; i < str.length; i++) {
             let letter = str.charAt(i);
@@ -120,15 +123,20 @@ const scratchGame = (() => {
         for (var i = 0; i < str.length; i++) {
             let letter = str.charAt(i);
             let timeout;
+
             setTimeout(_ => {
-                if (letter === 'f') {
-                    timeout = forward();
-                }
-                else if (letter === 'r') {
-                    timeout = turnRight();
-                }
-                else if (letter === 'l') {
-                    timeout = turnLeft();
+                console.log('ignore is ' + ignore)
+                if (!ignore) {
+
+                    if (letter === 'f') {
+                        timeout = forward();
+                    }
+                    else if (letter === 'r') {
+                        timeout = turnRight();
+                    }
+                    else if (letter === 'l') {
+                        timeout = turnLeft();
+                    }
                 }
             }, 400 * count);
             count += 1;
@@ -203,9 +211,13 @@ const scratchGame = (() => {
             else if (currDirection === 4 && (grid[currX][currY - 1] === 1 || grid[currX][currY - 1] === 5)) {
                 currY -= 1;
                 flag = 1;
+            } else {
+                swal('Error', 'Invalid move', 'error');
+                reset();
             }
         } catch (e) {
             swal('Error', 'Invalid move', 'error');
+            reset();
         }
 
 

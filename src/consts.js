@@ -14,6 +14,7 @@ const saveList = (userState, io) => {
   });
   io.sockets.emit('userUpdate', JSON.stringify(userState));
 }
+// maze solution = ffrffrflffflfffflffrffrflfflfffflfrflffrffflffflffrff
 
 const codes = ['kilgarah', 1621, 'basilisk', 'fddFfg46@rfdfd', 'knock-knock', 'total-recall', 35];
 
