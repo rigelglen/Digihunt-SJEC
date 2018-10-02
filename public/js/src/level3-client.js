@@ -31,10 +31,10 @@ button.addEventListener('click', () => {
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
             window.location.href = './level4'
         }).catch((err) => {
-            alert('Wrong code');
+            swal('Error', 'Wrong code', 'error');
             document.querySelector(".overlay").style.display = 'none';
         });
     } else {
-        alert('Incorrect input');
+        swal('Error', 'Incorrect input', 'error');
     }
 });

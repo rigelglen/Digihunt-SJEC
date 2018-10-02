@@ -194,5 +194,5 @@ function imgToPuzzle(slc, cols, rows, solve, callback){
 var puz1 = new PuzzleImg('puz1', '/img/jigsaw.jpg', 5, 4, 600, 450);
 puz1.solved = () => {
     const code = "Kilgarah";
-    alert('The name of the dragon is ' + code);
+    swal('Success', 'The name of the dragon is ' + code, 'info');
 }

@@ -943,8 +943,8 @@ SNAKE.Board = SNAKE.Board || (function() {
             elmTryAgain.style.zIndex = index;
             elmTryAgain.style.display = "block";
             me.setBoardState(0);
-            if(mySnake.snakeLength > 70){
-                alert('Code is ' + code);
+            if(mySnake.snakeLength > 50){
+                swal('Success', 'Code is ' + code, 'info');
             }
         };
         

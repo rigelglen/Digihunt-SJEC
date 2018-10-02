@@ -28,10 +28,10 @@ button.addEventListener('click', () => {
             window.location.href = './level2';
 
         }).catch((err) => {
-            alert('Wrong code');
+            swal('Error', 'Wrong code', 'error');
             document.querySelector(".overlay").style.display = 'none';
         });
     } else {
-        alert('Incorrect input');
+        swal('Error', 'Incorrect input', 'error');
     }
 });

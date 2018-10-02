@@ -183,10 +183,10 @@ app.post('/genID', jsonParser, (req, res) => {
     let userArr = []
 
     if (!req.session.uid) {
-        req.session.uid = parseInt(req.body.uid);
+        req.session.uid = req.body.uid;
         let hasFound = false;
         for (let i = 0; i < userState.length; i++) {
-            if ((userState[i].id === parseInt(req.body.uid))) {
+            if ((userState[i].id == req.body.uid)) {
                 hasFound = true;
                 userArr = userState[i]
             }

@@ -42,4 +42,4 @@ Receives:
  rows = number of rows
  solve = if 0, will remove the button that solves the puzzle
  callback = a function called when the puzzle is completed
-*/function imgToPuzzle(slc,cols,rows,solve,callback){for(var ob_puz,ims=document.querySelectorAll(slc),i=0;i<ims.length;i++)ob_puz=new PuzzleImg("puz"+i,ims[i],cols,rows),0==solve&&ob_puz.delSolve(),callback&&(ob_puz.solved=callback)}var puz1=new PuzzleImg("puz1","/img/jigsaw.jpg",5,4,600,450);puz1.solved=function(){alert("The name of the dragon is "+"Kilgarah")};
+*/function imgToPuzzle(slc,cols,rows,solve,callback){for(var ob_puz,ims=document.querySelectorAll(slc),i=0;i<ims.length;i++)ob_puz=new PuzzleImg("puz"+i,ims[i],cols,rows),0==solve&&ob_puz.delSolve(),callback&&(ob_puz.solved=callback)}var puz1=new PuzzleImg("puz1","/img/jigsaw.jpg",5,4,600,450);puz1.solved=function(){swal("Success","The name of the dragon is "+"Kilgarah","info")};

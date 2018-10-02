@@ -22,7 +22,7 @@ button.addEventListener('click', () => {
     if (val) {
         scratchGame.evalDirections(val);
     } else {
-        alert('Incorrect input');
+        swal('Error', 'Incorrect input', 'error');
     }
 });
 
@@ -105,7 +105,7 @@ const scratchGame = (() => {
         for (var i = 0; i < str.length; i++) {
             let letter = str.charAt(i);
             if(!(letter === 'f' || letter === 'r' || letter === 'l' )){
-                alert('Invalid input');
+                swal('Error', 'Incorrect input', 'error');
                 inp.value='';                
                 return;            
             }
@@ -171,7 +171,7 @@ const scratchGame = (() => {
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
             window.location.href = './level6';
         }).catch((err) => {
-            alert('Wrong code');
+            swal('Error', 'Wrong code', 'error');
             document.querySelector(".overlay").style.display = 'none';
         });
     }
@@ -199,7 +199,7 @@ const scratchGame = (() => {
                 flag = 1;
             }
         } catch (e) {
-            alert("Invalid move");
+            swal('Error', 'Invalid move', 'error');
         }
 
 

@@ -2,11 +2,12 @@ let button = document.querySelector('#submitCode');
 let inp = document.querySelector('#code');
 
 button.addEventListener('click', () => {
-    if (inp.value.trim().length > 5 && !isNaN(inp.value.trim())) {
+    if (inp.value.trim().length > 5) {
         document.querySelector(".overlay").style.display = 'flex';
         axios.post('/genID', {
-            uid: parseInt(inp.value.trim())
+            uid: inp.value.trim()
         }).then((response) => {
+            console.log(`Response is ${response.data}`)
             console.log(`ID generated is ${response.data.id}`);
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
@@ -16,6 +17,6 @@ button.addEventListener('click', () => {
             document.querySelector(".overlay").style.display = 'none';
         });
     }else{
-        alert('Incorrect input');
+        swal('Error', 'Incorrect input', 'error');
     }
 });
