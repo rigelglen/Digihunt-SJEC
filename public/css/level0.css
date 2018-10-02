@@ -64,6 +64,7 @@ div#page {
 
 #page p {
     font-size: 1.4em;
+    font-weight: bold;
 }
 
 input#code {
@@ -75,6 +76,7 @@ input#code {
     width: 50%;
     min-width: 200px;
     margin-right: 10px;
+    font-weight: bold;
 }
 
 button#submitCode, button#resetBtn {
