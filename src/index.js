@@ -91,6 +91,8 @@ app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, '../levels/start-noinput.html'));
         return;
     }
+    res.clearCookie('session');
+    res.clearCookie('session.sig');
     res.sendFile(path.join(__dirname, '../levels/start.html'));
 });
 
@@ -99,19 +101,42 @@ app.get('/gratz', (req, res) => {
         res.redirect(403, '/');
     } else {
         let user = userState.find(x => x.id === req.session.uid);
-        if (user.levels[7] === level8Code)
+        if (user && user.levels[7] === level8Code)
             res.sendFile(path.join(__dirname, '../levels/gratz.html'));
         else
             res.redirect(403, '/');
     }
 });
 
+app.get('/skipCompleted', (req, res) => {
+    if (req.session.uid) {
+        let hasFound = false;
+        let foundUser;
+        for (let i = 0; i < userState.length; i++) {
+            console.log(req.params.userID);
+            if (req.session.uid && userState[i].id == req.session.uid) {
+                hasFound = true;
+                foundUser = userState[i];
+            }
+        }
+        if (hasFound) {
+            if(foundUser.levels.length+1<8)
+                res.redirect(`/level${foundUser.levels.length+1}`);
+            else{
+                res.redirect('/gratz');
+            }
+        } else {
+            res.sendStatus(404);
+        }
+    } else {
+        res.redirect(200, "/");
+    }
+})
+
 app.get('/getLevels/:userID', (req, res) => {
     let hasFound = false;
-    console.log('fsdf');
     let response = { userArray: [] }
     for (let i = 0; i < userState.length; i++) {
-        console.log(req.params.userID);
         if (req.params.userID && userState[i].id == req.params.userID) {
             hasFound = true;
             response = { userArray: userState[i] }
@@ -130,7 +155,7 @@ app.get('/logout', jsonParser, (req, res) => {
         res.clearCookie("session.sig");
         res.clearCookie("io");
         res.send('<script>localStorage.clear(); window.location = "/"</script>');
-    }else{
+    } else {
         res.redirect(200, "/");
     }
 });
