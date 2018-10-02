@@ -38,6 +38,8 @@ const scratchGame = (() => {
     let currY;
     let currDirection;
     let x;
+    let t = [];
+    let isReset = false;
 
     function reset() {
         grid =
@@ -62,7 +64,13 @@ const scratchGame = (() => {
         currDirection = 3;
         x = grid[0].length;
         renderGrid();
-        ignore = true;
+        isReset = true;
+        if (t) {
+            for (var i = 0; i < t.length; i++) {
+                console.log(t[i]);
+                clearInterval(t[i]);
+            }
+        }
     }
 
     function renderGrid() {
@@ -77,7 +85,7 @@ const scratchGame = (() => {
         };
         let gridItems = document.querySelectorAll('#scratch .grid');
         let flatGrid = flatten(grid);
-
+        isReset = false;
         for (var i = 0; i < gridItems.length; i++) {
             gridItems[i].style.width = 600 / x + "px";
             gridItems[i].style.height = 600 / x + "px";
@@ -103,11 +111,10 @@ const scratchGame = (() => {
 
         }
     }
-    let ignore = false;
+
     function evalDirections(str) {
         let count = 0;
         reset();
-        ignore = false;
 
         str = str.replace(/ /g, '').toLowerCase();
 
@@ -123,22 +130,21 @@ const scratchGame = (() => {
         for (var i = 0; i < str.length; i++) {
             let letter = str.charAt(i);
             let timeout;
-
-            setTimeout(_ => {
-                console.log('ignore is ' + ignore)
-                if (!ignore) {
-
-                    if (letter === 'f') {
-                        timeout = forward();
-                    }
-                    else if (letter === 'r') {
-                        timeout = turnRight();
-                    }
-                    else if (letter === 'l') {
-                        timeout = turnLeft();
-                    }
+            t.push(setTimeout(_ => {
+                if (letter === 'f') {
+                    timeout = forward();
                 }
-            }, 400 * count);
+                else if (letter === 'r') {
+                    timeout = turnRight();
+                }
+                else if (letter === 'l') {
+                    timeout = turnLeft();
+                }
+                if (isReset) {
+                    clearTimeout(t);
+                }
+
+            }, 400 * count));
             count += 1;
         }
     }

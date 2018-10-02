@@ -37,8 +37,8 @@ $(document).ready(function() {
     let code = 'knock-knock'
 	var holding = [],
 		moves,
-		disksNum = 6,
-		minMoves = 63,
+		disksNum = 5,
+		minMoves = 31,
 		$canves = $('#canves'),
 		$restart = $canves.find('.restart'),
 		$tower = $canves.find('.tower'),
