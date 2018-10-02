@@ -23,7 +23,7 @@ button.addEventListener('click', () => {
             document.querySelector(".overlay").style.display = 'none';
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
-            window.location.href='./level8';
+            window.location.href='./gratz';
         }).catch((err) => {
             swal('Error', 'Wrong code', 'error');
             document.querySelector(".overlay").style.display = 'none';

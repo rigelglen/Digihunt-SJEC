@@ -7,7 +7,6 @@ axios.get(`/getLevels/${localStorage.id}`).then((response) => {
 });
 
 
-
 const mySnakeBoard = new SNAKE.Board({
     boardContainer: "snakeGame",
     fullScreen: false,

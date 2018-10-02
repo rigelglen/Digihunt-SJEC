@@ -6,7 +6,16 @@
     <title>Level 4</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/level0.css">
-
+    <link rel="stylesheet" href="/css/scratch.css">
+    <style>
+        body{
+            display: block;
+        }
+        div#container{
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+        </style>
 </head>
 
 <body>
@@ -25,11 +34,20 @@
                 hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam congue, ligula at
                 mattis mollis, magna massa semper diam, et blandit lectus lacus et nulla. Vivamus feugiat hendrerit
                 erat, sit amet feugiat sapien posuere vel. </p>
-            <div id="snakeGame" tabindex="0">
+
+            <div id="scratch">
+
             </div>
+
+            <div id="scratchControls">
+
+            </div>
+
+
             <div id="controls">
                 <input id="code" type="text">
                 <button id="submitCode">GO</button>
+                <button id="resetBtn">RESET</button>
             </div>
         </div>
     </div>
@@ -37,11 +55,7 @@
     <script src="/js/lib/axios.min.js"></script>
     <script src="/js/build/level4-client.js"></script>
 
-    <!--
 
-        CODE IS 1234569
-
-    -->
 </body>
 
 </html>

@@ -9,7 +9,7 @@ const fs = require('fs');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-const level8Code = require('./consts').codes[7];
+const level7Code = require('./consts').codes[6];
 const secret = 'abcd1234';
 
 let userState = [];
@@ -78,7 +78,6 @@ require('./levels/level4.js')(app, jsonParser, userState, io);
 require('./levels/level5.js')(app, jsonParser, userState, io);
 require('./levels/level6.js')(app, jsonParser, userState, io);
 require('./levels/level7.js')(app, jsonParser, userState, io);
-require('./levels/level8.js')(app, jsonParser, userState, io);
 
 app.get('/', (req, res) => {
     let hasFound = false;
@@ -101,7 +100,7 @@ app.get('/gratz', (req, res) => {
         res.redirect(403, '/');
     } else {
         let user = userState.find(x => x.id === req.session.uid);
-        if (user && user.levels[7] === level8Code)
+        if (user && user.levels[6] === level7Code)
             res.sendFile(path.join(__dirname, '../levels/gratz.html'));
         else
             res.redirect(403, '/');
@@ -120,7 +119,7 @@ app.get('/skipCompleted', (req, res) => {
             }
         }
         if (hasFound) {
-            if(foundUser.levels.length+1<8)
+            if(foundUser.levels.length+1<7)
                 res.redirect(`/level${foundUser.levels.length+1}`);
             else{
                 res.redirect('/gratz');
