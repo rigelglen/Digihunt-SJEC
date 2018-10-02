@@ -929,7 +929,7 @@ SNAKE.Board = SNAKE.Board || (function () {
         me.foodEaten = function () {
             var code = 'basilisk';
             elmLengthPanel.innerHTML = "Length: " + mySnake.snakeLength;
-            if (mySnake.snakeLength > 65) {
+            if (mySnake.snakeLength >= 60) {
                 me.setBoardState(0);
                 swal('Success', 'The Secret Code is ' + code, 'info');
             }
