@@ -81,7 +81,13 @@ require('./levels/level7.js')(app, jsonParser, userState, io);
 require('./levels/level8.js')(app, jsonParser, userState, io);
 
 app.get('/', (req, res) => {
-    if (req.session.uid) {
+    let hasFound = false;
+    for (let i = 0; i < userState.length; i++) {
+        if (req.session.uid && userState[i].id === req.session.uid) {
+            hasFound = true;
+        }
+    }
+    if (hasFound) {
         res.sendFile(path.join(__dirname, '../levels/start-noinput.html'));
         return;
     }
@@ -100,6 +106,34 @@ app.get('/gratz', (req, res) => {
     }
 });
 
+app.get('/getLevels/:userID', (req, res) => {
+    let hasFound = false;
+    console.log('fsdf');
+    let response = { userArray: [] }
+    for (let i = 0; i < userState.length; i++) {
+        console.log(req.params.userID);
+        if (req.params.userID && userState[i].id == req.params.userID) {
+            hasFound = true;
+            response = { userArray: userState[i] }
+        }
+    }
+    if (hasFound) {
+        res.send(response);
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+app.get('/logout', jsonParser, (req, res) => {
+    if (req.session.uid) {
+        res.clearCookie("session");
+        res.clearCookie("session.sig");
+        res.clearCookie("io");
+        res.send('<script>localStorage.clear(); window.location = "/"</script>');
+    }else{
+        res.redirect(200, "/");
+    }
+});
 
 app.get('/dash/:secret', (req, res) => {
     if (req.params.secret === secret) {
@@ -121,12 +155,15 @@ app.get('/wipe/:secret', (req, res) => {
 });
 
 app.post('/genID', jsonParser, (req, res) => {
+    let userArr = []
+
     if (!req.session.uid) {
         req.session.uid = parseInt(req.body.uid);
         let hasFound = false;
         for (let i = 0; i < userState.length; i++) {
             if ((userState[i].id === parseInt(req.body.uid))) {
                 hasFound = true;
+                userArr = userState[i]
             }
 
         }
@@ -138,7 +175,7 @@ app.post('/genID', jsonParser, (req, res) => {
             saveList(userState, io);
         }
     }
-    let response = { id: req.session.uid };
+    let response = { id: req.session.uid, userArray: userArr };
     res.send(response);
 });
 

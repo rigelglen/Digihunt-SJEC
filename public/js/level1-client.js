@@ -1,3 +1,8 @@
+axios.get(`/getLevels/${localStorage.id}`).then((response) => {
+    console.log(response.data.userArray.levels);
+    localStorage.levels = JSON.stringify(response.data.userArray.levels);
+});
+
 if (localStorage.levels && JSON.parse(localStorage.levels)[0]) {
     document.querySelector('.completed').style.display = 'inline';
 }
@@ -19,7 +24,7 @@ button.addEventListener('click', () => {
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("levels", JSON.stringify(response.data.userArray.levels));
 
-            window.location.href='./level2';
+            window.location.href = './level2';
 
         }).catch((err) => {
             alert('Wrong code');
