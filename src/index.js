@@ -112,14 +112,13 @@ app.get('/skipCompleted', (req, res) => {
         let hasFound = false;
         let foundUser;
         for (let i = 0; i < userState.length; i++) {
-            console.log(req.params.userID);
             if (req.session.uid && userState[i].id == req.session.uid) {
                 hasFound = true;
                 foundUser = userState[i];
             }
         }
         if (hasFound) {
-            if(foundUser.levels.length+1<7)
+            if(foundUser.levels.length+1<=7)
                 res.redirect(`/level${foundUser.levels.length+1}`);
             else{
                 res.redirect('/gratz');
