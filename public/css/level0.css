@@ -2,9 +2,9 @@ body {
     background: #795548;
     font-family: 'Papyrus';
     height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 h1 {
