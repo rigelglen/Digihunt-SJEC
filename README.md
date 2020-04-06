@@ -1,6 +1,6 @@
 # Digihunt
 
-This is the repo for digihunt treasure hunt for St. Jospeh Engineering college
+This is the repo for digihunt treasure hunt for St. Joseph Engineering College
 
 # LICENSE
 
